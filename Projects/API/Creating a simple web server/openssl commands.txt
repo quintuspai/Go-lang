@@ -1,0 +1,14 @@
+1. to generate key pair
+openssl genrsa -out keypair.key 2048
+
+2. extract public key from keypair
+openssl rsa -in keypair.key -pubout -out public.key
+
+3. to make a CSR
+openssl req -new -key keypair.key -out server.csr
+
+4. to verify
+openssl req -text -in server.csr -noout -verify
+
+5.to make a self signed certificate
+openssl x509 -in server.csr -out server.crt -req -signkey keypair.key 365
